@@ -1,6 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
 from django.utils.crypto import get_random_string
+
+# def home(request):
+    # return render(request, 'index.html')
 
 def createGroup(request):
     if request.method == 'POST':
@@ -12,6 +15,11 @@ def createGroup(request):
         group.save()
     # else:
         # render(request, 'calcapp/create_group.html')
+
+def deleteGroup(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    group.delete()
+    return redirect('home')
 
 def createPayment(request, group_id):
     # TODO: 프론트와 form 구조 추후 맞춰보기
@@ -40,3 +48,9 @@ def createPayment(request, group_id):
                 )
     # else:
         # render(request, 'calcapp/create_payment.html')
+
+def deletePayment(request, payment_id):
+    payment = get_object_or_404(Payment, pk=payment_id)
+    group_id = payment.group.pk
+    payment.delete()
+    return redirect('createPayment', group_id=group_id)
