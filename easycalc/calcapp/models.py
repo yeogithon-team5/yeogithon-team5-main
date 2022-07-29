@@ -1,21 +1,36 @@
 from django.db import models
-from account.models import *
+from account.models import User
+# Create your models here.
+
 
 class Group(models.Model):
-    users = models.ManyToManyField(User, related_name='groups')
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner')
-    code = models.CharField(max_length=30)
-    name = models.CharField(max_length=30)
-    is_done = models.BooleanField(default=False)
+    owner = models.ForeignKey(
+        User, related_name='owner', on_delete=models.CASCADE)
+    user = models.ManyToManyField(User, related_name='users')
+    code = models.CharField(max_length=10, unique=True)
+    name = models.CharField(max_length=20, null=True)
+
 
 class Payment(models.Model):
+    group = models.ForeignKey(
+        Group, related_name='payment', on_delete=models.CASCADE)
     date = models.DateField()
-    description = models.CharField(max_length=30)
-    divide_type = models.CharField(max_length=10, default='1/N')
-    payer = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    description = models.CharField(max_length=20)
+    divide_type = models.CharField(default="1/n", max_length=5)
+    payer = models.ForeignKey(
+        User, related_name='payer', on_delete=models.CASCADE)
+    amount = models.IntegerField(default=0)
+
+    @property
+    def amount_per_person(self):
+        total = self.amount
+        num = self.payer.count()
+        return total/num
+
 
 class ToPay(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.IntegerField()
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+    payment = models.ForeignKey(
+        Payment, related_name='topay', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='topay',
+                             on_delete=models.CASCADE)
+    amount = models.IntegerField(default=0)
