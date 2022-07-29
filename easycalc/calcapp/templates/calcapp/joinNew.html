@@ -1,103 +1,112 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="joinNew.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="joinNew.css" />
     <title>새로운 정산</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <img src="./여기톤 이미지 파일/페이지 상단 로고.png">
-        <ul>
-            <li><a href="#">로그인/회원가입</a></li>
-            <li><a href="#">마이페이지</a></li>
-        </ul>
+      <img src="{% static 'img/페이지 상단 로고.png' %}" />
+      <ul>
+        <li><a href="{% url 'login' %}">로그인/회원가입</a></li>
+        <li><a href="#">마이페이지</a></li>
+      </ul>
     </header>
     <nav>
-        <ul>
-            <li><a href="join.html">정산 참여하기</a></li>
-            <li><a href="joinNew.html">새로운 정산</a></li>
-            <li><a href="joinIng.html">참여 중인 정산</a></li>
-            <li><a href="joinEnd.html">완료된 정산</a></li>
-        </ul>
+      <ul>
+        <li><a href="{% url 'join' %}">정산 참여하기</a></li>
+        <li><a href="{% url 'creategroup' %}">새로운 정산</a></li>
+        <li><a href="{% url 'ongoing' %}">참여 중인 정산</a></li>
+        <li><a href="{% url 'complete' %}">완료된 정산</a></li>
+      </ul>
     </nav>
     <h1>새로운 정산</h1>
     <div class="bar"></div>
     <div id="content">
-    <nav id="status">
+      <nav id="status">
         <ul>
-            <li>정산 제목</li>
-            <li>기록코드 공유하기</li>
-            <li>멤버 목룍</li>
-            <li>정산하기</li>
-            <li>최종 정산하기</li>
+          <li>정산 제목</li>
+          <li>기록코드 공유하기</li>
+          <li>멤버 목록</li>
+          <li>정산하기</li>
+          <li>최종 정산하기</li>
         </ul>
-    </nav>
-    <div id="title">
+      </nav>
+      <div id="title">
         <h2>정산제목</h2>
-        <input type="text">
-    </div>
-    <div id="code">
+        <input type="text" />
+      </div>
+      <div id="code">
         <h2>기록코드 공유하기</h2>
-        <input id="myInput" value="Y E O 2 9 G I" readonly>
+        <input id="myInput" value="Y E O 2 9 G I" readonly />
         <button onclick="copy_to_clipboard()">복사</button>
         <button onclick="showMem()">정산하러 가기</button>
-    </div>
-    <div id="member">
+      </div>
+      <div id="member">
         <h2>멤버 목록</h2>
         <div class="wrapper">
-        <div><img src="./여기톤 이미지 파일/멤바2.png"> 김하나</div>
-        <div><img src="./여기톤 이미지 파일/멤바2.png"> 박두리</div>
-        <div><img src="./여기톤 이미지 파일/멤바2.png"> 정세리</div>
-        <div><img src="./여기톤 이미지 파일/멤바2.png"> 조모네</div>
+          <div>
+            <img src="{% static 'img/멤바2.png' %}" width="25px" /> 김하나
+          </div>
+          <div>
+            <img src="{% static 'img/멤바2.png' %}" width="25px" /> 박두리
+          </div>
+          <div>
+            <img src="{% static 'img/멤바2.png' %}" width="25px" /> 정세리
+          </div>
+          <div>
+            <img src="{% static 'img/멤바2.png' %}" width="25px" /> 조모네
+          </div>
         </div>
         <button onclick="letCal()">정산하러 가기</button>
-    </div>
-    <div id="cal">
+      </div>
+      <div id="cal">
         <h2></h2>
         <h2>날짜</h2>
         <!-- 일단 넘어가 -->
         <table>
-            <thead>
-                <th>지출 내역</th>
-                <th>계산 방법</th>
-                <th>결제자</th>
-                <th>지불 예정자</th>
-                <th>금액</th>
-            </thead>
-            <td><input type="text"></td>
-            <td><select></select></td>
-            <td><select></select></td>
-            <td><select></select></td>
-            <td><input type="number"></td>
+          <thead>
+            <th>지출 내역</th>
+            <th>계산 방법</th>
+            <th>결제자</th>
+            <th>지불 예정자</th>
+            <th>금액</th>
+          </thead>
+          <td><input type="text" /></td>
+          <td><select></select></td>
+          <td><select></select></td>
+          <td><select></select></td>
+          <td><input type="number" /></td>
         </table>
         <button>일정 추가하기</button>
         <button>소계 확인하기</button>
-    </div>
+      </div>
     </div>
     <footer></footer>
     <script>
-        function showMem(){ 	
-            var no = document.getElementById("code");
-            var bl = document.getElementById("member"); 		
-            no.style.display = 'none';
-            bl.style.display = 'block';
-        }
-        function letCal(){
-            var no = document.getElementById("member");
-            var bl = document.getElementById("cal"); 		
-            no.style.display = 'none';
-            bl.style.display = 'block';
-        }
-        function copy_to_clipboard() {
-            var copyText = document.getElementById('myInput');
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            document.execCommand("Copy");
-            alert('복사되었습니다.');
-        }
+      function showMem() {
+        var no = document.getElementById("code");
+        var bl = document.getElementById("member");
+        no.style.display = "none";
+        bl.style.display = "block";
+      }
+      function letCal() {
+        var no = document.getElementById("member");
+        var bl = document.getElementById("cal");
+        no.style.display = "none";
+        bl.style.display = "block";
+      }
+      function copy_to_clipboard() {
+        var copyText = document.getElementById("myInput");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("Copy");
+        alert("복사되었습니다.");
+      }
     </script>
-</body>
+  </body>
 </html>

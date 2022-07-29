@@ -6,6 +6,14 @@ from django.utils.crypto import get_random_string
 def home(request):
     return render(request, 'calcapp/main.html')
 
+def join(request):
+    return render(request, 'calcapp/join.html')
+
+def ongoing(request):
+    return render(request, 'calcapp/joinIng.html')
+
+def complete(request):
+    return render(request, 'calcapp/joinEnd.html')
 
 def calc_result(request, pk):
     group = get_object_or_404(Group, pk=pk)
@@ -34,8 +42,8 @@ def createGroup(request):
         group.code = str(request.user.id) + get_random_string(length=6)
         group.users.add(request.user)
         group.save()
-    # else:
-        # render(request, 'calcapp/create_group.html')
+    else:
+        return render(request, 'calcapp/joinNew.html')
 
 def deleteGroup(request, group_id):
     group = get_object_or_404(Group, pk=group_id)

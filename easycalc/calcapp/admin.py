@@ -4,7 +4,3 @@ from .models import *
 admin.site.register(Group)
 admin.site.register(Payment)
 admin.site.register(ToPay)
-
-admin.site.register(Group)
-admin.site.register(Payment)
-admin.site.register(ToPay)
