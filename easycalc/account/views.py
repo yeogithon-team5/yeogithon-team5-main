@@ -22,7 +22,7 @@ def login(request):
 
 
 def signup(request):
-    if request.user_is_authenticated:
+    if request.user.is_authenticated:
         return redirect('main')
 
     if request.method == 'POST':
