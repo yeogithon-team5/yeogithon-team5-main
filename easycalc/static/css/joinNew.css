@@ -1,53 +1,101 @@
-h1 {
-  color: hsl(220, 48%, 63%);
-  margin: 0 auto;
-  width: 60%;
+h1{
+    color: hsl(220, 48%, 63%);
+    margin: 0 auto;
+    width: 60%;
 }
-.bar {
-  background-color: rgb(121, 166, 230);
-  padding: 10px;
+.bar{
+    background-color: rgb(121, 166, 230);
+    padding: 10px;
 }
-#status {
-  margin: 10px 50px;
+#content{
+    height: 500px;
 }
-#status ul {
-  list-style: none;
-  display: inline-block;
-  text-align: center;
-  border-right: 5px solid rgb(121, 166, 230);
+#status{
+    width: 200px;
+    height: 100%;
+    margin: 0px;
+    float: left;
 }
-#status li {
-  margin: 20px;
+#status{
+    list-style: none;
+    text-align: center;
+    border-right: 3px solid rgb(146, 179, 225);
 }
-#title {
+#status li{
+    margin: 20px;
 }
-#wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
+.right{
+    float: left;
+    padding-left: 100px;
 }
-#member {
-  display: none;
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 100px);
+    grid-gap: 20px;
 }
-#wrapper div {
-  width: 300px;
-  height: 50px;
-  border: 2px solid rgb(121, 166, 230);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  /* padding: 10px;
+.wrapper #one{
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+.wrapper #two{
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+.wrapper #three{
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+.wrapper #four{
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+#member{
+    display: none;
+}
+.wrapper div{
+    width: 300px;
+    height: 50px;
+    border: 2px solid rgb(121, 166, 230);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    /* padding: 10px;
     font-size: 20px;
     margin: 20px; */
 }
-#member img {
-  width: 20px;
-  margin: 10px;
+#member img{
+    width: 20px;
+    margin: 10px;
 }
-#cal {
-  display: none;
+#cal{
+    display: none;
+}
+#cal table{
+    text-align: center;
+}
+#semi{
+    display: none;
+}
+#wrapper2 div{
+    width: 500px;
+    height: 50px;
+    border: 2px solid rgb(121, 166, 230);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+#final{
+    display: none;
+}
+#final img{
+    width: 20px;
+    margin: 10px;
 }
 footer {
-  background-color: hsl(220, 48%, 63%);
-  padding: 20px;
+    background-color: hsl(220, 48%, 63%);
+    padding: 20px;
+    clear: both;
 }
