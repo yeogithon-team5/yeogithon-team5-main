@@ -32,7 +32,7 @@ def createPayment(request, group_id):
         payment.payer = User.objects.filter(pk=request.POST['payer'])
         div_type = request.POST['divide_type']
         payment.divide_type = div_type
-        if not div_type or div_type == '1/N':
+        if div_type == '1/N' or not div_type:
             users = group.users_set.all()
             for user in users:
                 ToPay.objects.create(
