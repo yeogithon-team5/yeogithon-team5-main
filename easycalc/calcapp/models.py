@@ -2,7 +2,7 @@ from django.db import models
 from account.models import *
 
 class Group(models.Model):
-    user = models.ManyToManyField(related_name='groups')
+    users = models.ManyToManyField(User, related_name='groups')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner')
     code = models.CharField(max_length=30)
     name = models.CharField(max_length=30)
@@ -13,6 +13,7 @@ class Payment(models.Model):
     description = models.CharField(max_length=30)
     divide_type = models.CharField(max_length=10, default='1/N')
     payer = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
 class ToPay(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
