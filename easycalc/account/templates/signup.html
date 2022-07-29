@@ -1,0 +1,11 @@
+<br action="{% url 'account:signup' %}" method="POST">
+    {% csrf_token %}
+    {{form.username}}
+</br>
+{{form.bank}}
+</br>
+{{form.email}}
+</br>
+{{form.bank_account}}
+    <button type="submit">회원가입</button>
+    </form>
