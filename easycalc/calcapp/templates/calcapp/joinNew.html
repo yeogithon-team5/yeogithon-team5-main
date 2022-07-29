@@ -1,322 +1,207 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/joinNew.css' %}" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="joinNew.css">
     <title>새로운 정산</title>
     <style>
-      nav {
-        width: 1500px;
-      }
-      nav ul {
-        list-style: none;
-      }
-      nav ul li {
-        display: inline-block;
-        border: 5px solid rgb(123, 165, 212);
-        border-width: 0 2px;
-        margin: 60px;
-      }
+        nav {width: 1500px;}
+        nav ul {list-style: none;}
+        nav ul li {
+            display: inline-block;
+            border: 5px solid rgb(123, 165, 212);
+            border-width: 0 2px;
+            margin: 60px;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <img src="{% static 'img/페이지 상단 로고.png' %}" />
-      <div style="float: right; display: flex; justify-content: space-around">
-        <a href="{% url 'login' %}">로그인/회원가입</a>
-        <a href="#">마이페이지</a>
-      </div>
+        <img src="./여기톤 이미지 파일/페이지 상단 로고.png">
+        <div style="float: right; display: flex; justify-content: space-around;">
+            <a href="login.html">로그인/회원가입</a>
+            <a href="#">마이페이지</a>
+        </div>
     </header>
     <nav>
-      <ul>
-        <li><a href="{% url 'join' %}">정산 참여하기</a></li>
-        <li><a href="{% url 'creategroup' %}">새로운 정산</a></li>
-        <li><a href="{% url 'ongoing' %}">참여 중인 정산</a></li>
-        <li><a href="{% url 'complete' %}">완료된 정산</a></li>
-      </ul>
+        <ul>
+            <li><a href="join.html">정산 참여하기</a></li>
+            <li><a href="joinNew.html">새로운 정산</a></li>
+            <li><a href="joinIng.html">참여 중인 정산</a></li>
+            <li><a href="joinEnd.html">완료된 정산</a></li>
+        </ul>
     </nav>
     <h1>새로운 정산</h1>
     <div class="bar"></div>
     <div id="content">
-      <div id="status">
-        <li>정산 제목</li>
-        <li>기록코드 공유하기</li>
-        <li>멤버 목록</li>
-        <li>정산하기</li>
-        <li>최종 정산하기</li>
-      </div>
-      <div class="right">
-        <div id="title">
-          <h2>정산제목</h2>
-          <input type="text" />
+    <div id="status">
+            <li>정산 제목</li>
+            <li>기록코드 공유하기</li>
+            <li>멤버 목록</li>
+            <li>정산하기</li>
+            <li>최종 정산하기</li>
+    </div>
+    <div class="right">
+    <div id="title">
+        <h2>정산제목</h2>
+        <input type="text">
+    </div>
+    <div id="code">
+        <h2>기록코드 공유하기</h2>
+        <input id="myInput" value="Y E O 2 9 G I" readonly>
+        <button onclick="copy_to_clipboard()">복사</button>
+        <button onclick="showMem()">정산하러 가기</button>
+    </div>
+    <div id="member">
+        <h2>멤버 목록</h2>
+        <div class="wrapper">
+            <div id="one"><img src="./여기톤 이미지 파일/멤바2.png"> 김하나</div>
+            <div id="two"><img src="./여기톤 이미지 파일/멤바2.png"> 박두리</div>
+            <div id="three"><img src="./여기톤 이미지 파일/멤바2.png"> 정세리</div>
+            <div id="four"><img src="./여기톤 이미지 파일/멤바2.png"> 조모네</div>
         </div>
-        <div id="code">
-          <h2>기록코드 공유하기</h2>
-          <input id="myInput" value="Y E O 2 9 G I" readonly />
-          <button onclick="copy_to_clipboard()">복사</button>
-          <button onclick="showMem()">정산하러 가기</button>
-        </div>
-        <div id="member">
-          <h2>멤버 목록</h2>
-          <div class="wrapper">
-            <div id="one">
-              <img src="{% static 'img/멤바2.png' %}" width="25px" /> 김하나
-            </div>
-            <div id="two">
-              <img src="{% static 'img/멤바2.png' %}" width="25px" /> 박두리
-            </div>
-            <div id="three">
-              <img src="{% static 'img/멤바2.png' %}" width="25px" /> 정세리
-            </div>
-            <div id="four">
-              <img src="{% static 'img/멤바2.png' %}" width="25px" /> 조모네
-            </div>
-          </div>
-          <button onclick="letCal()">정산하러 가기</button>
-        </div>
-        <div id="cal">
-          <button onclick="showFinal()" style="float: right">
-            최종 정산하기
-          </button>
-          <h2>날짜</h2>
-          <select>
-            <option>2022</option>
-            <option>2021</option>
-            <option>2020</option>
-            <option>2019</option></select
-          ><span>년</span>
-          <select>
-            <option>01</option>
-            <option>02</option>
-            <option>03</option>
-            <option>04</option>
-            <option>05</option>
-            <option>06</option>
-            <option>07</option>
-            <option>08</option>
-            <option>09</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option></select
-          ><span>월</span>
-          <div id="history">
-            <table id="historyTb">
-              <thead>
+        <button onclick="letCal()">정산하러 가기</button>
+    </div>
+    <div id="cal">
+        <button onclick="showFinal()" style="float: right;">최종 정산하기</button>
+        <h2>날짜</h2>
+        <select><option>2022</option><option>2021</option><option>2020</option><option>2019 </option></select><span>년</span>
+        <select><option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option></select><span>월</span>
+        <div id="history">
+        <table id="historyTb">
+            <thead>
                 <th>지출 내역</th>
                 <th>계산 방법</th>
                 <th>결제자</th>
                 <th>지불 예정자</th>
                 <th>금액</th>
-              </thead>
-              <tr class="moneyContent">
-                <td><input type="text" /></td>
-                <td id="how">
-                  <select>
-                    <option value="1/n">1/N</option>
-                    <option value="div">분할</option>
-                  </select>
-                </td>
-                <td>
-                  <select>
-                    <option>김하나</option>
-                    <option>박두리</option>
-                    <option>정세리</option>
-                    <option>조모네</option>
-                  </select>
-                </td>
-                <td>
-                  <select>
-                    <option>김하나</option>
-                    <option>박두리</option>
-                    <option>정세리</option>
-                    <option>조모네</option>
-                  </select>
-                </td>
-                <td><input type="number" /></td>
-              </tr>
-            </table>
-            <button
-              style="
-                border: none;
-                width: 100%;
-                background-color: rgb(121, 166, 230);
-                border-radius: 10px;
-                text-align: center;
-              "
-              onclick="addMoney()"
-            >
-              <img
-                src="{% static 'img/플러스 이모지.png' %}"
-                style="width: 20px"
-              />
-            </button>
-            <button>
-              <img
-                src="{% static 'img/플러스 이모지.png' %}"
-                style="width: 10px"
-              />일정 추가하기
-            </button>
-            <button onclick="showSemi()">▶소계 확인하기</button>
-          </div>
+            </thead>
+            <tr class="moneyContent">
+            <td><input type="text"></td>
+            <td id="how"><select><option value="1/n">1/N</option><option value="div">분할</option></select></td>
+            <td><select><option>김하나</option><option>박두리</option><option>정세리</option><option>조모네</option></select></td>
+            <td><select><option>김하나</option><option>박두리</option><option>정세리</option><option>조모네</option></select></td>
+            <td><input type="number"></td>
+            </tr>
+        </table>
+        <button style="border: none; width: 100%; background-color: rgb(121, 166, 230); border-radius: 10px; text-align: center;" onclick="addMoney()"><img src="여기톤 이미지 파일/플러스 이모지.png" style="width: 20px"></button>
+        <button><img src="여기톤 이미지 파일/플러스 이모지.png" style="width: 10px;">일정 추가하기</button>
+        <button onclick="showSemi()">▶소계 확인하기</button>
         </div>
-        <div id="semi">
-          <h2>소계 확인하기</h2>
-          <div>
+    </div>
+    <div id="semi">
+        <h2>소계 확인하기</h2>
+        <div>
             <table>
-              <thead>
-                <th>지출 예정자</th>
-                <th>계산 방법</th>
-                <th>결제자</th>
-                <th>지출 내역</th>
-                <th>금액</th>
-              </thead>
-              <td><input type="text" /></td>
-              <td>
-                <select>
-                  <option>1/N</option>
-                  <option>분할</option>
-                </select>
-              </td>
-              <td>
-                <select>
-                  <option>김하나</option>
-                  <option>박두리</option>
-                  <option>정세리</option>
-                  <option>조모네</option>
-                </select>
-              </td>
-              <td>
-                <select>
-                  <option>김하나</option>
-                  <option>박두리</option>
-                  <option>정세리</option>
-                  <option>조모네</option>
-                </select>
-              </td>
-              <td><input type="number" /></td>
+                <thead>
+                    <th>지출 예정자</th>
+                    <th>계산 방법</th>
+                    <th>결제자</th>
+                    <th>지출 내역</th>
+                    <th>금액</th>
+                </thead>
+                <td><input type="text" value="김하나" readonly></td>
+                <td><select><option>1/N</option><option>분할</option></select></td>
+                <td><select><option>김하나</option><option>박두리</option><option>정세리</option><option>조모네</option></select></td>
+                <td><select><option>김하나</option><option>박두리</option><option>정세리</option><option>조모네</option></select></td>
+                <td><input type="number"></td>
             </table>
-          </div>
         </div>
-        <div id="final">
-          <div id="wrapper2">
-            <div>
-              <img src="{% static 'img/멤바2.png' %}" width="25px" /> 김하나<img
-                src="{% static 'img/꺽쇠 이모지.png' %}"
-                style="
-                  position: absolute;
-                  right: 20px;
-                  transform: rotate(90deg);
-                  width: 25px;
-                "
-              />
-            </div>
-            <div>
-              <img src="{% static 'img/멤바2.png' %}" width="25px" /> 박두리<img
-                src="{% static 'img/꺽쇠 이모지.png' %}"
-                style="
-                  position: absolute;
-                  right: 20px;
-                  transform: rotate(90deg);
-                  width: 25px;
-                "
-              />
-            </div>
-            <div>
-              <img src="{% static 'img/멤바2.png' %}" width="25px" /> 정세리<img
-                src="{% static 'img/꺽쇠 이모지.png' %}"
-                style="
-                  position: absolute;
-                  right: 20px;
-                  transform: rotate(90deg);
-                  width: 25px;
-                "
-              />
-            </div>
-            <div>
-              <img src="{% static 'img/멤바2.png' %}" width="25px" /> 조모네<img
-                src="{% static 'img/꺽쇠 이모지.png' %}"
-                style="
-                  position: absolute;
-                  right: 20px;
-                  transform: rotate(90deg);
-                  width: 25px;
-                "
-              />
-            </div>
-          </div>
+    </div>
+    <div id="final">
+        <h2>최종 정산하기</h2>
+        <div id="wrapper2">
+        <div><img src="./여기톤 이미지 파일/멤바2.png"> 김하나<img src="/여기톤 이미지 파일/꺽쇠 이모지.png" style="position: absolute; right: 20px; transform: rotate(90deg);" onclick="showOne">
+        <!-- <table>
+            <thead>
+                <th>받을사람</th>
+                <th>이체금액</th>
+                <th>계좌정보</th>
+            </thead>
+            <tr>
+                <td>박두리</td>
+            </tr>
+        </table> -->
         </div>
-      </div>
+        <div><img src="./여기톤 이미지 파일/멤바2.png"> 박두리<img src="/여기톤 이미지 파일/꺽쇠 이모지.png" style="position: absolute; right: 20px; transform: rotate(90deg);"></div>
+        
+        <div><img src="./여기톤 이미지 파일/멤바2.png"> 정세리<img src="/여기톤 이미지 파일/꺽쇠 이모지.png" style="position: absolute; right: 20px; transform: rotate(90deg);"></div>
+        
+        <div><img src="./여기톤 이미지 파일/멤바2.png"> 조모네<img src="/여기톤 이미지 파일/꺽쇠 이모지.png" style="position: absolute; right: 20px; transform: rotate(90deg);"></div>
+        </div>
+        
+    </div>
+    </div>
     </div>
     <footer></footer>
     <script>
-      function showMem() {
-        var no = document.getElementById("code");
-        var bl = document.getElementById("member");
-        no.style.display = "none";
-        bl.style.display = "block";
-      }
-      function letCal() {
-        var no = document.getElementById("member");
-        var bl = document.getElementById("cal");
-        no.style.display = "none";
-        bl.style.display = "block";
-      }
-      function showSemi() {
-        var no = document.getElementById("history");
-        var bl = document.getElementById("semi");
-        no.style.display = "none";
-        bl.style.display = "block";
-      }
-      function copy_to_clipboard() {
-        var copyText = document.getElementById("myInput");
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        document.execCommand("Copy");
-        alert("복사되었습니다.");
-      }
-      function addMoney() {
-        var addRow = document.getElementById("historyTb").insertRow();
-        var addContent = addRow.insertCell();
-        var el = document.createElement("input");
-        el.setAttribute("type", "text");
-        addContent.appendChild(el);
-        var addHow = addRow.insertCell();
-        var sel = document.createElement("select");
-        sel.options[0] = new Option("1/N");
-        sel.options[1] = new Option("분할");
-        addHow.appendChild(sel);
-        var addPay = addRow.insertCell();
-        var sel = document.createElement("select");
-        sel.options[0] = new Option("김하나");
-        sel.options[1] = new Option("박두리");
-        sel.options[1] = new Option("정세리");
-        sel.options[1] = new Option("조모네");
-        addPay.appendChild(sel);
-        var addWill = addRow.insertCell();
-        var sel = document.createElement("select");
-        sel.options[0] = new Option("김하나");
-        sel.options[1] = new Option("박두리");
-        sel.options[1] = new Option("정세리");
-        sel.options[1] = new Option("조모네");
-        addWill.appendChild(sel);
-        var addMuch = addRow.insertCell();
-        var el = document.createElement("input");
-        el.setAttribute("type", "text");
-        addMuch.appendChild(el);
-      }
-      function showFinal() {
-        var no = document.getElementById("semi");
-        var bl = document.getElementById("final");
-        no.style.display = "none";
-        bl.style.display = "block";
-        var no = document.getElementById("title");
-        no.style.display = "none";
-        var no = document.getElementById("cal");
-        no.style.display = "none";
-      }
+        function showMem(){ 	
+            var no = document.getElementById("code");
+            var bl = document.getElementById("member"); 		
+            no.style.display = 'none';
+            bl.style.display = 'block';
+        }
+        function letCal(){
+            var no = document.getElementById("member");
+            var bl = document.getElementById("cal"); 		
+            no.style.display = 'none';
+            bl.style.display = 'block';
+        }
+        function showSemi(){
+            var no = document.getElementById("history");
+            var bl = document.getElementById("semi"); 		
+            no.style.display = 'none';
+            bl.style.display = 'block';
+        }
+        function copy_to_clipboard() {
+            var copyText = document.getElementById('myInput');
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("Copy");
+            alert('복사되었습니다.');
+        }
+        function addMoney(){
+            var addRow=document.getElementById("historyTb").insertRow();
+            var addContent = addRow.insertCell();
+            var el = document.createElement('input');
+            el.setAttribute('type', 'text');
+            addContent.appendChild(el);
+            var addHow = addRow.insertCell();
+            var sel = document.createElement('select');
+            sel.options[0] = new Option('1/N');
+            sel.options[1] = new Option('분할');
+            addHow.appendChild(sel);      
+            var addPay = addRow.insertCell();
+            var sel = document.createElement('select');
+            sel.options[0] = new Option('김하나');
+            sel.options[1] = new Option('박두리');
+            sel.options[1] = new Option('정세리');
+            sel.options[1] = new Option('조모네');
+            addPay.appendChild(sel); 
+            var addWill = addRow.insertCell();
+            var sel = document.createElement('select');
+            sel.options[0] = new Option('김하나');
+            sel.options[1] = new Option('박두리');
+            sel.options[1] = new Option('정세리');
+            sel.options[1] = new Option('조모네');
+            addWill.appendChild(sel);
+            var addMuch = addRow.insertCell();
+            var el = document.createElement('input');
+            el.setAttribute('type', 'text');
+            addMuch.appendChild(el);
+        }
+        function showFinal(){
+            var no = document.getElementById("semi");
+            var bl = document.getElementById("final"); 		
+            no.style.display = 'none';
+            bl.style.display = 'block';
+            var no = document.getElementById("title");
+            no.style.display = 'none';
+            var no = document.getElementById("cal");
+            no.style.display = 'none';
+        }
     </script>
-  </body>
+</body>
 </html>
