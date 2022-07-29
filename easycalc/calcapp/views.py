@@ -2,8 +2,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
 from django.utils.crypto import get_random_string
 
-# def home(request):
-    # return render(request, 'index.html')
+def home(request):
+    return render(request, 'calcapp/main.html')
 
 def createGroup(request):
     if request.method == 'POST':
