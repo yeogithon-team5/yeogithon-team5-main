@@ -18,7 +18,7 @@ def login(request):
             return redirect('main')
     else:
         form = AuthenticationForm()
-        return render(request, "login.html", {'form': form})
+        return render(request, "account/login.html", {'form': form})
 
 
 def signup(request):
@@ -33,7 +33,7 @@ def signup(request):
             return redirect('main')
     else:
         form = UserCreationForm()
-        return render(request, 'signup.html', {'form': form})
+        return render(request, 'account/signup.html', {'form': form})
 
 
 def logout(request):
